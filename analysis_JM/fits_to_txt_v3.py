@@ -50,7 +50,7 @@ def fits_to_txt(directory, rebinned_wavelength_step=0.1, min_rebinned_wavelength
     fits_file_names = glob.glob(os.path.join(directory, "*.fits"))
 
     # Define log file names
-    log_file = open(directory + "bdj_log.txt", "w")
+    log_file = open(directory + "bdj_log.txt_test", "w")
     bjd_list_file = open(directory + "bdj_list.txt", "w")
     
     log_file.write("index,full_file_name,date_avg,exposure_time,bjd,bvcor\n")
