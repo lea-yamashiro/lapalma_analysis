@@ -609,7 +609,7 @@ if __name__ == "__main__":
             WAVE_full = file_contents[FILENAME][:,0]
             FLUX_full = file_contents[FILENAME][:,1]
             # Keep only the region around H-alpha (6560) 5550 - 7550 is +/- 1000... 
-            mask = (WAVE_full >= 6300) & (WAVE_full <= 6820)
+            mask = (WAVE_full >= 6400) & (WAVE_full <= 6750)
 
             WAVE = WAVE_full[mask]
             FLUX = FLUX_full[mask]
