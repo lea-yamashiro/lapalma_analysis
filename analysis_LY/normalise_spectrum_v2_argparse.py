@@ -430,7 +430,9 @@ def onType(event):
             np.savetxt(file_path, point_coords)
 
             # Fit the spline-continuum through the points
-            spline = splrep(point_coords[:,0], point_coords[:,1], k=2)
+            # spline = splrep(point_coords[:,0], point_coords[:,1], k=2) 
+            # NOTE: originally k = 2 but this is hard to skip the whole h-alpha part without creating a weird bump
+            spline = splrep(point_coords[:,0], point_coords[:,1], k=1)
             continuum = splev(WAVE,spline)
 
             # Add the fitted continuum to the plot
