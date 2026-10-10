@@ -187,6 +187,7 @@ plt.rcParams.update({'font.size': 14})
 import re
 import warnings
 warnings.filterwarnings('ignore')
+from pathlib import Path
 
 from scipy.interpolate import splrep, splev
 
@@ -425,7 +426,7 @@ def onType(event):
             np.savetxt(file_path, point_coords)
 
             # Fit the spline-continuum through the points
-            spline = splrep(point_coords[:,0], point_coords[:,1], k=2)
+            spline = splrep(point_coords[:,0], point_coords[:,1], k=1)
             continuum = splev(WAVE,spline)
 
             # Add the fitted continuum to the plot
@@ -566,8 +567,8 @@ if __name__ == "__main__":
     medianAPPROX =  False
 
     # Define the Folder which contains the txt file with the flux and wavelengths
-    spectrum_dir = '/Users/leayamashiro/AnA_MSc/Observations/LaPalma_analysis/data/our_data051026/full_median/'
-     
+    # spectrum_dir = '/Users/leayamashiro/AnA_MSc/Observations/LaPalma_analysis/data/our_data051026/full_median/'
+    spectrum_dir = '/home/jade/lapalma_analysis/analysis_JM/data/our_data051026/full'  # combine_2 is the two spectra of day one combined together.
     
     # Get the path to the output directory and create it if it does not exist
     OUTPUT_DIR = os.path.join(spectrum_dir, "normalised")
@@ -586,7 +587,9 @@ if __name__ == "__main__":
 
     # Load the spectra from the .txt files
     file_contents = loadTxtFiles(spectrum_dir)
-    
+    # mean_dir = '/home/jade/lapalma_analysis/analysis_JM/data/our_data051026/combine_2/mean_dir'
+    # file_contents = loadTxtFiles(mean_dir)  # Load the mean spectrum file instead of the directory
+
     
     # Begin the normalisation of each spectrum
     for FILENAME in file_contents:
