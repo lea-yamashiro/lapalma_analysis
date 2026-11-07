@@ -193,6 +193,8 @@ from scipy.interpolate import splrep, splev
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--directory', '-d')
+parser.add_argument('--norm_filename_suffix', '-nfs')
+parser.add_argument('--mean_norm_directory', '-mnd')
 args = parser.parse_args()
 
 global pointCOUNTER # counter for points used for deleting function
@@ -446,7 +448,8 @@ def onType(event):
         # Search for the normalised spectrum data and write to file if found
         for artist in ax[1].get_children():
             if hasattr(artist,"get_label") and bool(re.search('normalised',str(artist.get_label()))):
-                file = f"{FILENAME.split('.')[0]}_norm.txt"
+                # file = f"{FILENAME.split('.')[0]}_norm.txt"
+                file = f"{FILENAME.split('.')[0]}_norm_{args.norm_filename_suffix}.txt"
                 file_path = os.path.join(OUTPUT_DIR, file)
                 np.savetxt(file_path, np.array(artist.get_data()).T)
                 print(f"Wrote to file {file}")
@@ -575,7 +578,7 @@ if __name__ == "__main__":
     # Define the Folder which contains the txt file with the flux and wavelengths
     # spectrum_dir = '/Users/leayamashiro/AnA_MSc/Observations/LaPalma_analysis/data/our_data051026/full_median/'
     spectrum_dir = str(args.directory)
-
+    # norm_dir = str(args.mean_norm_directory)
     # Get the path to the output directory and create it if it does not exist
     OUTPUT_DIR = os.path.join(spectrum_dir, "normalised")
     if not os.path.exists(OUTPUT_DIR):
