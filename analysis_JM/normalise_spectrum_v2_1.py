@@ -568,7 +568,8 @@ if __name__ == "__main__":
 
     # Define the Folder which contains the txt file with the flux and wavelengths
     # spectrum_dir = '/Users/leayamashiro/AnA_MSc/Observations/LaPalma_analysis/data/our_data051026/full_median/'
-    spectrum_dir = '/home/jade/lapalma_analysis/analysis_JM/data/our_data051026/full'  # combine_2 is the two spectra of day one combined together.
+    # spectrum_dir = '/home/jade/lapalma_analysis/analysis_JM/091031/full'  # combine_2 is the two spectra of day one combined together.
+    spectrum_dir = '/home/jade/lapalma_analysis/analysis_JM/091031/fitsfull/'
     
     # Get the path to the output directory and create it if it does not exist
     OUTPUT_DIR = os.path.join(spectrum_dir, "normalised")
