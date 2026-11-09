@@ -86,11 +86,18 @@ def fits_to_txt(directory, rebinned_wavelength_step=0.1, min_rebinned_wavelength
             no_wavelengths = header['NAXIS1']
             wavelengths = np.exp(np.arange(no_wavelengths)*wavelength_step + min_wavelength)
 
+            mask = (wavelengths >= 6500) & (wavelengths <= 6600)
+
+            original_step = np.median(np.diff(wavelengths[mask]))
+            print(f"Original sampling near H-alpha: {original_step:.6f} Å")
+            
             # # Remove nans from flux
             # no_nan = np.sum(np.isnan(flux))
             # wavelengths_wo_nan = wavelengths[no_nan:]
             # flux_wo_nan = flux[no_nan:]
             # data_wo_nan = np.column_stack((wavelengths_wo_nan, flux_wo_nan))
+
+            data = np.column_stack((wavelengths, flux))
 
             # Rebin spectrum
             wavelengths_rebinned = np.arange(min_rebinned_wavelength, max_rebinned_wavelength, rebinned_wavelength_step)
@@ -99,7 +106,7 @@ def fits_to_txt(directory, rebinned_wavelength_step=0.1, min_rebinned_wavelength
 
             # Save data without nans
             full_file_name = object_name + "_" + str(unseq) + ".txt"
-            np.savetxt(full_directory+full_file_name, data_wo_nan, fmt="%.5f %.2f", delimiter=' ')
+            np.savetxt(full_directory+full_file_name, data, fmt="%.5f %.2f", delimiter=' ')
 
             # Save rebinned data
             rebinned_file_name = object_name + "_" + str(unseq) + "_rebinned.txt"
