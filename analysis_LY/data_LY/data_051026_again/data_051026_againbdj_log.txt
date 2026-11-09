@@ -1,0 +1,1 @@
+index,full_file_name,date_avg,exposure_time,bjd,bvcor
